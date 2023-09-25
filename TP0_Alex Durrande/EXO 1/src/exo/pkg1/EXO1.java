@@ -26,7 +26,7 @@ public class EXO1 {
         String prenom;
         Scanner sc;
 sc = new Scanner(System.in);
-System.out.println("Bonjour, quel est votre prenom ?");
+System.out.println("Bonjour, Alex ?");
 sc.nextLine();
 }
 
