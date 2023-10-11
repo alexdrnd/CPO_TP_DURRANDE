@@ -47,6 +47,8 @@ public class TP2_Bieres_Durrande {
         
         cinqBiere.lireEtiquette(); 
         cinqBiere.Décapsuler();
+        
+        System.out.println(uneBiere) ;
         // TODO code application logic here
     }
     
