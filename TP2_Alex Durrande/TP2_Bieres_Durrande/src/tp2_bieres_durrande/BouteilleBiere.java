@@ -17,6 +17,14 @@ double degreAlcool;
 String brasserie;
 boolean ouverte;
 
+@Override
+public String toString() {
+    String chaine_a_retourner;
+    chaine_a_retourner = nom + " (" + degreAlcool + " degrés) Ouverte ? ";
+if (ouverte == true ) chaine_a_retourner += "oui" ;
+else chaine_a_retourner += "non" ;
+return chaine_a_retourner ;
+}
 
 
 public void lireEtiquette(){
@@ -46,10 +54,7 @@ public boolean Décapsuler() {
         System.out.println("Erreur : biere déjà ouverte.");
         return false; // La bière était déjà ouverte
     }
-}
-
-
-    
+}  
 
 }
 
