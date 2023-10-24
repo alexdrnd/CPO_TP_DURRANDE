@@ -25,5 +25,5 @@ public class Guerrier extends Personnages {
         this.cheval = cheval;
     }
     
-    // Ajoutez des getters si nécessaire pour accéder à l'attribut cheval.
+   
 }
