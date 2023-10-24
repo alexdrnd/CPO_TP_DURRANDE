@@ -58,7 +58,32 @@ for (int i = 0; i < tabPerso.size(); i++) {
     System.out.println(tabPerso.get(i));
 }
 
+        Guerrier Guerrier3 = new Guerrier("Batman", 2, false);
+        Magicien Magicien3 = new Magicien ("Spiderman", 8, false);
+        
+        Baton bat3 = new Baton ("z", 5 , 5);
+        Baton bat4 = new Baton ("y", 5 , 5);
+        Baton bat5 = new Baton ("x", 5 , 5);
+        
+        Epee Epee4 = new Epee ("a", 5, 6);
+        Epee Epee5 = new Epee ("b", 5, 6);
+        Epee Epee6 = new Epee ("c", 5, 6);
+        
+        Guerrier3.ajouterUneArme(Epee4);
+        Guerrier3.ajouterUneArme(Epee5);
+        Guerrier3.ajouterUneArme(Epee6);
+        
+        Magicien3.ajouterUneArme(bat3);
+        Magicien3.ajouterUneArme(bat4);
+        Magicien3.ajouterUneArme(bat5);
+        
+
+        Guerrier1.armePortee();
+                       
+        
+    }
+
 
     }
 
-}
+
