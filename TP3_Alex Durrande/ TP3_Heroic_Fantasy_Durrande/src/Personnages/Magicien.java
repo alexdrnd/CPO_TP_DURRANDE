@@ -11,17 +11,25 @@ import Personnages.*;
  * @author Alexandre
  */
 
-    public class Magicien extends Personnages {
-    private boolean confirmé;
+public class Magicien extends Personnages {
+    boolean confirmer;    
     
-    public Magicien(String nom, int niveauDeVie, boolean confirmé){
-        this.nom = nom;
-        this.niveauDeVie = niveauDeVie;
-        this.confirmé = confirmé;
+    public Magicien (String nom, int pdv, boolean a){
+        super(nom , pdv);
+        confirmer=a;
+        
     }
-    
-    public void setCheval(boolean confirmé){
-        this.confirmé = confirmé;
-    }
-    
+ @Override
+public String toString() {
+String chaine_a_retourner;
+if (confirmer == true){
+chaine_a_retourner = ("Le magicien "+nom+niveauDeVie+ "vie confirmé");
+return chaine_a_retourner;
+}
+else {
+    chaine_a_retourner = ("Le magicien "+nom+niveauDeVie+ "vie débutant");
+
+   return chaine_a_retourner; 
+}
+}
 }
