@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class TP3_Heroic_Fantasy_Durrande {
 
     /**
-     * @param args the command line arguments
+     * 
      */
     public static void main(String[] args) {
 
