@@ -7,8 +7,8 @@ TP3
 package Personnages;
 
 import Armes.Arme;
-import java.util.Scanner;
-import Personnages.*;
+
+
 
 /**
  *
@@ -21,6 +21,15 @@ public abstract class Personnages {
     String nom; 
     int niveauDeVie; 
     String ArmePortee = null;
+    Arme armeEnMain;
+    
+      public Personnages (String nom, int niveauDeVie) {
+        this.nom = nom;
+        this.niveauDeVie = niveauDeVie;
+        armeEnMain = null;
+        
+    }
+    
     
     ArrayList<Arme> armesPossedes = new ArrayList<Arme>();
     
@@ -43,16 +52,31 @@ public abstract class Personnages {
         Arme arme = this.armesPossedes.get(armeAjoutee);
         ArmePortee = arme.getNom();
     }
-    
+     public void seFatiguer() {
+        
+    }
     public int connaitreVie() {
         return niveauDeVie;
     }   
     public String connaitrePerso() {
         return nom;
     }   
+    public boolean estVivant() {
+        return niveauDeVie > 0;
+    }
+    public void estAttaque(int points) {
+        
+    }
+    
     @Override
-    public String toString() {                              
+    public String toString() {   
+        String Infoarme = (armeEnMain != null) ? "Arme en main : " + armeEnMain.toString() : "Aucune arme en main";
         return "Nom du personnage : " + nom + ", Niveau de vie : " + niveauDeVie;
     }
-}
+       
+    }
+    
+    
+    
+
 
