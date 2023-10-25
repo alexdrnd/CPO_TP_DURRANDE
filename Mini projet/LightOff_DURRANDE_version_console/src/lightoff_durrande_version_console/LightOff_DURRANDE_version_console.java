@@ -31,7 +31,19 @@ public class LightOff_DURRANDE_version_console {
 System.out.println (Case1.toString());
 System.out.println (Case2.toString());
         
-      
+    
+
+
+
+GrilleDeCellulles Partie1 = new GrilleDeCellulles (5, 5);
+System.out.println (Partie1);
+
+
+
+
+
+
+
     }
     
 }
