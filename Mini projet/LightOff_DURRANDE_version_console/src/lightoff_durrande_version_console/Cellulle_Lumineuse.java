@@ -57,11 +57,8 @@ public class Cellulle_Lumineuse {
 public String toString() {
     return this.etat ? "X" : "O";
 }
-
-     
-    
 }
-
+  
 
 
 
