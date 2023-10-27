@@ -87,33 +87,28 @@ public int nbColonnes;
      * @param nbTours
      */
     public void melangerMatriceAleatoirement(int nbTours) {
-        Random random = new Random();
+    Random random = new Random();
 
-        for (int tour = 0; tour < nbTours; tour++) {
-            for (int i = 0; i < nbLignes; i++) {
-                for (int j = 0; j < nbColonnes; j++) {
-                    matriceCellules[i][j].EteindreCellule(); 
-                }
+    for (int tour = 0; tour < nbTours; tour++) {
+        int choix = random.nextInt(100); 
+
+        switch (choix) {
+            case 0 :
+                activerLigneDeCellules(random.nextInt(nbLignes)); 
+                break;
+            case 1:
+                activerColonneDeCellules(random.nextInt(nbColonnes)); 
+                break;
+            case 2: 
+                 activerDiagonaleDescendante(); 
+                 break;
+            case 3:
+                activerDiagonaleMontante(); 
+                break;
             }
-
-            int choix = random.nextInt(5); 
-
-            switch (choix) {
-                case 0, 1 -> activerLigneDeCellules(random.nextInt(nbLignes)); 
-                case 2, 3 -> activerColonneDeCellules(random.nextInt(nbColonnes)); 
-                case 4 -> {
-                    if (random.nextBoolean()) {
-                        activerDiagonaleDescendante(); 
-                    } else {
-                        activerDiagonaleMontante(); 
-                    }
-                }
-                default -> {
-                }
-            }
-           
-                    }
+        }
     }
+    
 
     /**
      *allume toutes les cellulles d'une ligne
@@ -121,7 +116,7 @@ public int nbColonnes;
      */
     public void activerLigneDeCellules(int idLigne) {
         for (int j = 0; j < nbColonnes; j++) {
-            matriceCellules[idLigne][j].EteindreCellule();
+            matriceCellules[idLigne][j].ActiverCellule();
         }
     }
 
@@ -131,7 +126,7 @@ public int nbColonnes;
      */
     public void activerColonneDeCellules(int idColonne) {
         for (int i = 0; i < nbLignes; i++) {
-            matriceCellules[i][idColonne].EteindreCellule();
+            matriceCellules[i][idColonne].ActiverCellule();
         }
     }
 
@@ -140,7 +135,7 @@ public int nbColonnes;
      */
     public void activerDiagonaleDescendante() {
         for (int i = 0; i < nbLignes && i < nbColonnes; i++) {
-            matriceCellules[i][i].EteindreCellule();
+            matriceCellules[i][i].ActiverCellule();
         }
     }
 
@@ -149,7 +144,7 @@ public int nbColonnes;
      */
     public void activerDiagonaleMontante() {
         for (int i = 0; i < nbLignes && i < nbColonnes; i++) {
-            matriceCellules[i][nbColonnes - 1 - i].EteindreCellule();
+            matriceCellules[i][nbColonnes - 1 - i].ActiverCellule();
         }
     }
 
