@@ -86,28 +86,23 @@ public int nbColonnes;
      *Genere une grille de cellulles, ?teint et alllume au fur et ? mesure des tours les lignes colonnes diagonales permet de s'assurer que qu'une grille puisse ?tre r?alisable
      * @param nbTours
      */
-    public void melangerMatriceAleatoirement(int nbTours) {
+public void melangerMatriceAleatoirement(int nbTours) {
     Random random = new Random();
 
     for (int tour = 0; tour < nbTours; tour++) {
-        int choix = random.nextInt(100); 
-
-        switch (choix) {
-            case 0 :
-                activerLigneDeCellules(random.nextInt(nbLignes)); 
-                break;
-            case 1:
-                activerColonneDeCellules(random.nextInt(nbColonnes)); 
-                break;
-            case 2: 
-                 activerDiagonaleDescendante(); 
-                 break;
-            case 3:
-                activerDiagonaleMontante(); 
-                break;
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                int choix = random.nextInt(2);
+                if (choix == 0) {
+                    matriceCellules[i][j].EteindreCellule();
+                } else {
+                    matriceCellules[i][j].ActiverCellule();
+                }
             }
         }
     }
+}
+
     
 
     /**
