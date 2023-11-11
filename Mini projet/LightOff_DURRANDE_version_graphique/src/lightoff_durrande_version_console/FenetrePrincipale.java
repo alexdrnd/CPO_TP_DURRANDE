@@ -3,9 +3,13 @@
  */
 package lightoff_durrande_version_console;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
-
+import javax.swing.JPanel;
+import java.awt.Font;
 /**
  *
  * @author Alexandre
@@ -15,33 +19,137 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     /**
      * Creates new form FenetrePrincipale
      */
-    
-    
     GrilleDeCellulles grille;
-    int nbCoups; 
+    int nbCoups;
+    int i;
 
-public void initialiserPartie() {
- grille.eteindreToutesLesCellules();
- grille.melangerMatriceAleatoirement(10);
- }
+    public void initialiserPartie() {
+        grille.eteindreToutesLesCellules();
+        grille.melangerMatriceAleatoirement(10);
+    }
 
     public FenetrePrincipale() {
         initComponents();
-        
-        int nbLignes = 10;
-        int nbColonnes = 10;
+
+        int nbLignes = 6;
+        int nbColonnes =6;
         this.grille = new GrilleDeCellulles(nbLignes, nbColonnes);
 
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-    for (int i=0; i < nbLignes; i++) {
- for (int j=0; j < nbColonnes; j++ ) {
-CellullesGraphiques bouton_cellule = new CellullesGraphiques( grille.matriceCellules[i][j], 36,36); // cr?ation d'un bouton
- PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
- }
-    }
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                CellullesGraphiques bouton_cellule = new CellullesGraphiques(grille.matriceCellules[i][j]);
+                PanneauGrille.add(bouton_cellule);
+            }
+        }
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70,
+                nbColonnes * 40, nbLignes * 40));
+        this.pack();
+        this.revalidate();
+
+        PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
+        getContentPane().add(PanneauBoutonsVerticaux,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1 * 40, nbLignes * 40));
+        this.pack();
+        this.revalidate();
+        for (i = 0; i < nbLignes; i++) {
+            JButton bouton_ligne = new JButton();
+            ActionListener ecouteurClick = new ActionListener() {
+                final int j = i;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    grille.activerLigneDeCellules(j);
+                    jouerCoup();
+                    repaint();
+                    verifierVictoire();
+                }
+            };
+            bouton_ligne.addActionListener(ecouteurClick);
+            PanneauBoutonsVerticaux.add(bouton_ligne);
+
+        }
+
+        PaneauxBoutonsHorizontal.setLayout(new GridLayout(1, nbColonnes));
+        getContentPane().add(PaneauxBoutonsHorizontal,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, nbColonnes * 40, 1 * 40));
+        this.pack();
+        this.revalidate();
+
+        for (i = 0; i < nbColonnes; i++) {
+            JButton bouton_colonne = new JButton();
+            ActionListener ecouteurClick = new ActionListener() {
+                final int j = i;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    grille.activerColonneDeCellules(j);
+                    jouerCoup();
+                    repaint();
+                    verifierVictoire(); 
+                }
+            };
+            bouton_colonne.addActionListener(ecouteurClick);
+            PaneauxBoutonsHorizontal.add(bouton_colonne);
+
+        }
+
+        Diago1.setLayout(new GridLayout(1, 1));
+        getContentPane().add(Diago1,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1 * 40, 1 * 40));
+        this.pack();
+        this.revalidate();
+        JButton bouton_diago1 = new JButton();
+        ActionListener ecouteurClick = new ActionListener() {
+            final int j = i;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                grille.activerDiagonaleDescendante();
+                jouerCoup();
+                repaint();
+                verifierVictoire();
+            }
+        };
+        bouton_diago1.addActionListener(ecouteurClick);
+        Diago1.add(bouton_diago1);
     
-    initialiserPartie();
+        Diago2.setLayout(new GridLayout(1, 1));
+        getContentPane().add(Diago2,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50 * (nbLignes + 1), 1 * 40, 1 * 40));
+        this.pack();
+        this.revalidate();
+        JButton bouton_diago2 = new JButton();
+        ActionListener ecouteurClick1 = new ActionListener() {
+            final int j = i;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                grille.activerDiagonaleMontante();
+                jouerCoup();
+                repaint();
+                verifierVictoire();
+                      
+            }
+        };
+        bouton_diago2.addActionListener(ecouteurClick1);
+        Diago2.add(bouton_diago2);
+        
+        customizeButtons(Diago1);
+        customizeButtons(PaneauxBoutonsHorizontal);
+        customizeButtons(Diago2);
+       customizeButtons(PanneauBoutonsVerticaux);
+
+
+        initialiserPartie();
+    
     }
+ 
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,13 +161,31 @@ CellullesGraphiques bouton_cellule = new CellullesGraphiques( grille.matriceCell
     private void initComponents() {
 
         PanneauGrille = new javax.swing.JPanel();
+        PanneauBoutonsVerticaux = new javax.swing.JPanel();
+        PaneauxBoutonsHorizontal = new javax.swing.JPanel();
+        Diago1 = new javax.swing.JPanel();
+        Diago2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PanneauGrille.setBackground(new java.awt.Color(22, 22, 22));
+        PanneauGrille.setBackground(new java.awt.Color(0, 0, 51));
         PanneauGrille.setLayout(new java.awt.GridLayout(10, 10));
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 360, 360));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 410, 400));
+
+        PanneauBoutonsVerticaux.setBackground(new java.awt.Color(0, 0, 255));
+        PanneauBoutonsVerticaux.setForeground(new java.awt.Color(102, 102, 255));
+        getContentPane().add(PanneauBoutonsVerticaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 30, 400));
+
+        PaneauxBoutonsHorizontal.setBackground(new java.awt.Color(51, 51, 255));
+        PaneauxBoutonsHorizontal.setForeground(new java.awt.Color(0, 0, 255));
+        getContentPane().add(PaneauxBoutonsHorizontal, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 410, 40));
+
+        Diago1.setBackground(new java.awt.Color(51, 51, 255));
+        getContentPane().add(Diago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 60, 50));
+
+        Diago2.setBackground(new java.awt.Color(51, 51, 255));
+        getContentPane().add(Diago2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 50, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,10 +225,38 @@ CellullesGraphiques bouton_cellule = new CellullesGraphiques( grille.matriceCell
         });
     }
 
+   
+private void verifierVictoire() {
+        if (grille.cellulesToutesEteintes()) {
+            afficherFenetreVictoire();
+            initialiserPartie();
+        }
+    }
+  private void jouerCoup() {
+     
+        nbCoups++;
+        verifierVictoire();
+    }
+    private void afficherFenetreVictoire() {
+        FenetreVictoire fenetreVictoire = new FenetreVictoire(true, nbCoups);
+        fenetreVictoire.setVisible(true);
+    }
+
+    private void customizeButtons(JPanel button) {
+        button.setBackground(Color.BLACK);
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Arial", Font.PLAIN, 14));
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Diago1;
+    private javax.swing.JPanel Diago2;
+    private javax.swing.JPanel PaneauxBoutonsHorizontal;
+    private javax.swing.JPanel PanneauBoutonsVerticaux;
     private javax.swing.JPanel PanneauGrille;
     // End of variables declaration//GEN-END:variables
 
-
+  
 
 }
